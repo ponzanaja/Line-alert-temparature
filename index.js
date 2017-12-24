@@ -19,14 +19,6 @@ firebase.initializeApp(config)
 let db = firebase.database().ref('db')
 let showdata = []
 
-/*app.get('/wakeme', function (req,res){
-  res.send('I wake up')
-})
-
-app.post('/wakeme', function (req,res){
-  var data = req.body
-  res.sendStatus(200)
-})*/
 db.on('child_added', function (snapshot) {
   let item = snapshot.val()
   item.id = snapshot.key
@@ -50,7 +42,7 @@ db.on('child_changed', function (snapshot) {
 
 setInterval(() => {
    wakeMeup()
-}, 300000) // ev
+}, 300000) 
 
 
 function alertTemparature (nodeName) {
@@ -68,8 +60,6 @@ function checkNodeDown(nodeName) {
   let nodeStatusAlive = showdata.find(info => info.node === nodeName).alive
   let nodeStatusAliveShow = showdata.find(info => info.node === nodeName).alive2
   let dataID =  showdata.find(info => info.node === nodeName).id
-  console.log("DATA ID = "+ dataID)
-  console.log("nodestatusalive " + nodeStatusAlive)
   if(nodeStatusAlive){
     firebase.database().ref('db/' + dataID ).update({
       alive: false
@@ -90,7 +80,7 @@ function alertInOutBound (nodeName) {
   let limitOut = showdata.find(info => info.node === nodeName).limitout
 
   if(inBound[inBound.length-1].value*1 >= limitIn ){
-    // console.log("Send Alert") 
+  
     let overInbound = JSON.stringify(inBound[inBound.length-1].value)
   overInbound = overInbound.replace(/(")/g,'')
     let message = " ⚠️⚠️⚠️ WARNING your system Inbound Over Limitation :" + overInbound + "Check your System now !! ⚠️ ⚠️ ⚠️"
@@ -98,7 +88,7 @@ function alertInOutBound (nodeName) {
   }
 
   if(outBound[outBound.length-1].value*1 >= limitOut ){
-    // console.log("Send Alert") 
+    
     let overOutbound = JSON.stringify(outBound[outBound.length-1].value)
   overOutbound = overOutbound.replace(/(")/g,'')
     let message = " ⚠️⚠️⚠️ WARNING your system Outbound Over Limitation :" + overOutbound + "Check your System now !! ⚠️ ⚠️ ⚠️"
