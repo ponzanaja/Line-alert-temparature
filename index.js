@@ -35,9 +35,9 @@ db.on('child_changed', function (snapshot) {
   /* When instance changed this parth will update your local variable to update data*/
 })
   setInterval(() => {
-    alertTemparature ('Node2')
-    alertInOutBound ('Node2')
-    checkNodeDown ('Node2')
+    alertTemparature ('Node1')
+    alertInOutBound ('Node1')
+    checkNodeDown ('Node1')
  },90000)
 
 setInterval(() => {
