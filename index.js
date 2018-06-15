@@ -16,7 +16,7 @@ let config = {
 }
 
 firebase.initializeApp(config)
-let db = firebase.database().ref('db')
+let db = firebase.database().ref('alive')
 let showdata = []
 
 db.on('child_added', function (snapshot) {
